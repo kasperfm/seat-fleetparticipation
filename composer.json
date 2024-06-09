@@ -1,0 +1,33 @@
+{
+  "name": "kasperfm/seat-fleetparticipation",
+  "description": "Handle fleet participation in your corporation",
+  "type": "seat-plugin",
+  "license": "GPL-2.0-only",
+  "authors": [
+    {
+      "name": "Kasper Færch Mikkelsen",
+      "email": "contact@kasperfm.com",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+      "psr-4": {
+          "KasperFM\\Seat\\FleetParticipation\\": "src/"
+      }
+  },
+
+  "extra": {
+      "laravel": {
+          "providers": [
+              "KasperFM\\Seat\\FleetParticipation\\FleetParticipationServiceProvider"
+          ]
+      }
+  },
+  "require": {
+    "php": "^8.1",
+    "laravel/framework": "^10.0",
+    "eveseat/web": "^5.0.1",
+    "eveseat/eveapi": "^5.0.1"
+  }
+}
