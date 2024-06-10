@@ -3,8 +3,9 @@
 namespace KasperFM\Seat\FleetParticipation\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Seat\Services\Models\ExtensibleModel;
 
-class FleetParticipationPoints extends Model
+class FleetParticipationPoints extends ExtensibleModel
 {
     public $timestamps = true;
 
