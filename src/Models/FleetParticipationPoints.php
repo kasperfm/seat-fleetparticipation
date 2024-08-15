@@ -11,5 +11,5 @@ class FleetParticipationPoints extends ExtensibleModel
 
     protected $table = 'kasperfm_fleetparticipation_points';
 
-    protected $fillable = ['id', 'user_id', 'points', 'registered_by'];
+    protected $fillable = ['id', 'user_id', 'points', 'fleet_id', 'registered_by'];
 }

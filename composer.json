@@ -25,8 +25,7 @@
       }
   },
   "require": {
-    "php": "^8.1",
-    "laravel/framework": "^10.0",
+    "php": "^8.2",
     "eveseat/web": "^5.0.1",
     "eveseat/eveapi": "^5.0.1"
   }
