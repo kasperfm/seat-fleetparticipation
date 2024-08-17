@@ -17,6 +17,6 @@ class FleetParticipationPoints extends ExtensibleModel
 
     public function fleet(): BelongsTo
     {
-        return $this->belongsTo(FleetParticipationFleet::class, 'fleet_id');
+        return $this->belongsTo(FleetParticipationFleet::class, 'fleet_id', 'id');
     }
 }

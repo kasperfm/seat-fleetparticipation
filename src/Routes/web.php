@@ -20,9 +20,9 @@
             'middleware' => 'can:fleetparticipation.manager'
         ]);
 
-        Route::get('/admin', [
-            'as' => 'fleetparticipation.settings',
-            'uses' => 'FleetParticipationController@register',
+        Route::get('/manage', [
+            'as' => 'fleetparticipation.manage',
+            'uses' => 'FleetParticipationController@manage',
             'middleware' => 'can:fleetparticipation.admin'
         ]);
     });

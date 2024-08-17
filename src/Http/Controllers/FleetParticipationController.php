@@ -17,12 +17,33 @@ class FleetParticipationController extends Controller
 {
     public function mypoints()
     {
-        return view('fleetparticipation::mypoints');
+        $points = FleetParticipationPoints::with('fleet')->where('user_id', auth()->user()->id)->get();
+        $totalPoints = FleetParticipationPoints::where('user_id', auth()->user()->id)->sum('points');
+
+        $fleetPoints = $points->groupBy([function ($item) {
+            return $item->fleet?->title ?? 'Unknown fleet';
+        }]);
+
+        $fleets = [];
+        foreach ($fleetPoints as $title => $fleet) {
+            $fleetEntry = [];
+            $fleetEntry['points'] = $fleet->sum('points');
+            $fleetEntry['title'] = $title;
+
+            $fleets[] = $fleetEntry;
+        }
+
+        return view('fleetparticipation::mypoints', ['fleets' => $fleets, 'totalPoints' => $totalPoints]);
     }
 
     public function register(Request $request)
     {
         return view('fleetparticipation::register', ['fleetId' => $request->get('fleet_id')]);
+    }
+
+    public function manage(Request $request)
+    {
+        return view('fleetparticipation::manage');
     }
 
     public function saveFleet(Request $request)

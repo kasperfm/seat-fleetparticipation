@@ -22,7 +22,7 @@ return [
             'settings' => [
                 'name' => 'Manage points',
                 'icon' => 'fa fa-cog',
-                'route' => 'fleetparticipation.settings',
+                'route' => 'fleetparticipation.manage',
                 'permission' => ['fleetparticipation.admin']
             ],
         ],
