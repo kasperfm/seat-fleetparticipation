@@ -38,7 +38,12 @@ class FleetParticipationController extends Controller
 
     public function register(Request $request)
     {
-        return view('fleetparticipation::register', ['fleetId' => $request->get('fleet_id')]);
+        $latestFleets = FleetParticipationFleet::latest()->take(5)->get();
+
+        return view('fleetparticipation::register', [
+            'fleetId' => $request->get('fleet_id'),
+            'latestFleets' => $latestFleets
+        ]);
     }
 
     public function manage(Request $request)
@@ -54,7 +59,7 @@ class FleetParticipationController extends Controller
 
         $pointsValue = $request->input('points');
 
-        if ($request->has('fleet_id')) {
+        if ($request->has('fleet_id') && $request->input('fleet_id') !== "newfleet") {
             $fleet = FleetParticipationFleet::find($request->input('fleet_id'));
         } else {
             $fleet = FleetParticipationFleet::create([
