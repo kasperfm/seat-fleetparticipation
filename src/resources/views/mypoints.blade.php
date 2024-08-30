@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>Your total fleet points: {{ $totalPoints ?? 0 }}</h1>
+    <h2>Earned this month: {{ $pointsThisMonth }}</h2>
     <hr>
     <p>Fleets you have participated in:</p>
     <ul>

@@ -25,4 +25,22 @@
             'uses' => 'FleetParticipationController@manage',
             'middleware' => 'can:fleetparticipation.admin'
         ]);
+
+        Route::get('/edit/{fleet}', [
+            'as' => 'fleetparticipation.edit',
+            'uses' => 'FleetParticipationController@editFleet',
+            'middleware' => 'can:fleetparticipation.admin'
+        ]);
+
+        Route::get('/edit/{fleet}/details/{pilot}', [
+            'as' => 'fleetparticipation.edit.details',
+            'uses' => 'FleetParticipationController@getFleetDetails',
+            'middleware' => 'can:fleetparticipation.admin'
+        ]);
+
+        Route::post('/edit/{fleet}/details/{pilot}/addpoints', [
+            'as' => 'fleetparticipation.edit.details.addpoints',
+            'uses' => 'FleetParticipationController@addPointsToMember',
+            'middleware' => 'can:fleetparticipation.admin'
+        ]);
     });

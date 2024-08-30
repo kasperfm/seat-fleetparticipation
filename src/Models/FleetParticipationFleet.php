@@ -25,4 +25,9 @@ class FleetParticipationFleet extends ExtensibleModel
     {
         return $this->hasOne(User::Class, 'id', 'registered_by');
     }
+
+    public function memberCount()
+    {
+        return FleetParticipationPoints::where('fleet_id', $this->id)->distinct('user_id')->count('user_id');
+    }
 }
