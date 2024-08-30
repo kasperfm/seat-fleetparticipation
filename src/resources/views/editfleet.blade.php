@@ -87,7 +87,7 @@ if (pointsTable) {
                 var modal = $(this)
                 modal.find('.modal-title').text(pilotName)
 
-                $("#add-value-btn").click(function () {
+                $("#add-value-btn").click(function (e) {
                     var pointsValue = $("#add-points-input").val();
 
                     $.ajax({
@@ -104,6 +104,7 @@ if (pointsTable) {
                             getMemberPointsUsingAjax(user);
                         }
                     });
+                    e.preventDefault();
                 });
             });
 
