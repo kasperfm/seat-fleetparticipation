@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 /**
- * Class ExportController
+ * Class FleetParticipationController
  *
  * @package KasperFM\Seat\FleetParticipation
  */
@@ -37,10 +37,27 @@ class FleetParticipationController extends Controller
 
         $pointsThisMonth = FleetParticipationPoints::where('user_id', auth()->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('points');
 
+        $fleetMembers = FleetParticipationPoints::whereMonth('created_at', Carbon::now()->month)->orderBy('user_id')
+            ->get()
+            ->groupBy('user_id');
+
+        $highscore = [];
+        foreach ($fleetMembers as $pilotID => $fleetMemberPoints) {
+            $pilot = [];
+            $pilotName = User::find($pilotID)->main_character->name;
+
+            $pilot['totalPoints'] = FleetParticipationPoints::whereMonth('created_at', Carbon::now()->month)->where('user_id', $pilotID)->sum('points');
+            $pilot['user_id'] = $pilotID;
+            $highscore[$pilotName] = $pilot;
+        }
+
+        uasort($highscore, fn($a, $b) => $b['totalPoints'] <=> $a['totalPoints']);
+
         return view('fleetparticipation::mypoints', [
             'fleets' => $fleets,
             'totalPoints' => $totalPoints,
-            'pointsThisMonth' => $pointsThisMonth
+            'pointsThisMonth' => $pointsThisMonth,
+            'highscore' => $highscore
         ]);
     }
 
