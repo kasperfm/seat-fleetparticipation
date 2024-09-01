@@ -43,4 +43,10 @@
             'uses' => 'FleetParticipationController@addPointsToMember',
             'middleware' => 'can:fleetparticipation.admin'
         ]);
+
+        Route::post('/edit/{fleet}/details/{pilot}/removepoints', [
+            'as' => 'fleetparticipation.edit.details.removepoints',
+            'uses' => 'FleetParticipationController@removePointsFromMember',
+            'middleware' => 'can:fleetparticipation.admin'
+        ]);
     });

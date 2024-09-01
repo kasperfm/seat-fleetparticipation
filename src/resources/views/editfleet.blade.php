@@ -18,7 +18,11 @@
                 <tr>
                     <td>{{ $pilotName }}</td>
                     <td>{{ $entry['totalPoints'] }}</td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showPilotDetails" data-character="{{ $pilotName }}" data-userid="{{ $entry['user_id'] }}">Details</button></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showPilotDetails" data-character="{{ $pilotName }}" data-userid="{{ $entry['user_id'] }}">Details</button>
+                        <button type="button" class="btn btn-success add-points-to-member-btn" data-userid="{{ $entry['user_id'] }}">Add point</button>
+                        <button type="button" class="btn btn-danger remove-points-from-member-btn" data-userid="{{ $entry['user_id'] }}">Remove point</button>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -45,13 +49,6 @@
                         <tbody id="details-table-body">
                         </tbody>
                     </table>
-                    <hr>
-                    <form class="form-inline">
-                        <div class="form-group mx-sm-3">
-                            <input type="number" max="100" min="-100" name="add-points-input" id="add-points-input" value="1" class="form-control">
-                        </div>
-                        <button type="button" id="add-value-btn" name="add-value-btn" class="btn btn-primary">Add new value</button>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -67,14 +64,46 @@
             $('#edit_fleet_table').DataTable({});
             var pointsTable;
 
+            $(".add-points-to-member-btn").click(function (event) {
+                var userId = event.target.dataset.userid
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    cache: false,
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        points: 1,
+                    },
+                    url: '/fleetparticipation/edit/{{$fleet->id}}/details/' + userId + '/addpoints',
+                    success: function(response) {
+                        alert(1 + ' point added to the fleet member.');
+                    }
+                });
+            });
+
+            $(".remove-points-from-member-btn").click(function (event) {
+                var userId = event.target.dataset.userid
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    cache: false,
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        points: 1,
+                    },
+                    url: '/fleetparticipation/edit/{{$fleet->id}}/details/' + userId + '/removepoints',
+                    success: function(response) {
+                        alert(1 + ' point removed from the fleet member.');
+                    }
+                });
+            });
+
             $('#showPilotDetails').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var user = button.data('userid') // Extract info from data-* attributes
                 var pilotName = button.data('character') // Extract info from data-* attributes
-
-if (pointsTable) {
-   // pointsTable.destroy();
-}
 
                 getMemberPointsUsingAjax(user);
                 pointsTable = $('#details_table').DataTable({
@@ -86,26 +115,6 @@ if (pointsTable) {
 
                 var modal = $(this)
                 modal.find('.modal-title').text(pilotName)
-
-                $("#add-value-btn").click(function (e) {
-                    var pointsValue = $("#add-points-input").val();
-
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        cache: false,
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            points: pointsValue,
-                        },
-                        url: '/fleetparticipation/edit/{{$fleet->id}}/details/' + user + '/addpoints',
-                        success: function(response) {
-                            alert(pointsValue + ' point(s) added to the fleet member.');
-                            getMemberPointsUsingAjax(user);
-                        }
-                    });
-                    e.preventDefault();
-                });
             });
 
             function getMemberPointsUsingAjax(user)
@@ -132,7 +141,8 @@ if (pointsTable) {
                 });
             }
 
-            function append_json_to_table(data){
+            function append_json_to_table(data)
+            {
                 var table = document.getElementById('details-table-body');
                 data.forEach(function(object) {
                     var tr = document.createElement('tr');

@@ -79,6 +79,22 @@ class FleetParticipationController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function removePointsFromMember(Request $request, FleetParticipationFleet $fleet, User $pilot)
+    {
+        if (!$request->has('points') || empty($request->input('points'))) {
+            return response()->json(['success' => false]);
+        }
+
+        FleetParticipationPoints::create([
+            'user_id' => $pilot->id,
+            'points' => $request->input('points') * -1,
+            'fleet_id' => $fleet->id,
+            'registered_by' => auth()->user()->id
+        ]);
+
+        return response()->json(['success' => true]);
+    }
+
     public function getFleetDetails(Request $request, FleetParticipationFleet $fleet, User $pilot)
     {
         $details = $fleet->points()->where('user_id', $pilot->id)->get();
