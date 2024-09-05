@@ -6,11 +6,11 @@
     <table class="table" id="fleet_table">
         <thead>
         <tr>
-            <th scope="col">Registered at</th>
-            <th scope="col">Fleet title</th>
-            <th scope="col">Registered by</th>
-            <th scope="col">Number of members</th>
-            <th scope="col">Total points</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.registered_at_label') }}</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.fleet_name') }}</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.registered_by_label') }}</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.number_of_members_label') }}</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.total_points_label') }}</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -23,7 +23,7 @@
                 <td>{{ $fleet->registeredBy->main_character->name }}</td>
                 <td>{{ $fleet->memberCount() }}</td>
                 <td>{{ $fleet->points->sum('points') }}</td>
-                <td><a href="{{ route('fleetparticipation.edit', $fleet->id) }}">Edit</a></td>
+                <td><a href="{{ route('fleetparticipation.edit', $fleet->id) }}">{{ __('fleetparticipation::plugin.edit_btn') }}</a></td>
             </tr>
         @endforeach
         </tbody>

@@ -17,6 +17,11 @@ use Carbon\Carbon;
  */
 class FleetParticipationController extends Controller
 {
+    function __construct()
+    {
+        app()->setLocale(env('APP_LOCALE'));
+    }
+
     public function mypoints()
     {
         $points = FleetParticipationPoints::with('fleet')->where('user_id', auth()->user()->id)->get();

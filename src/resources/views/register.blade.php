@@ -8,25 +8,25 @@
         @if($fleetId)
             <input type="hidden" value="{{ $fleetId }}" name="fleet_id">
         @endif
-        <p>Copy &amp; Paste the fleet members here, write a event title, and click the Register button</p>
+        <p>{{ __('fleetparticipation::plugin.register_help_info') }}</p>
         <hr>
         @if(empty($fleetId))
-            <p>You can also select one of the recent fleets for quicker registration.</p>
-            <label for="fleet_id">Recent fleets:</label>
+            <p>{{ __('fleetparticipation::plugin.recent_fleets_help_info') }}</p>
+            <label for="fleet_id">{{ __('fleetparticipation::plugin.recent_fleets') }}:</label>
             <select name="fleet_id" id="fleet_id">
-                <option selected value="newfleet">New fleet...</option>
+                <option selected value="newfleet">{{ __('fleetparticipation::plugin.new_fleet') }}...</option>
                 @foreach($latestFleets as $latestFleet)
-                    <option value="{{ $latestFleet->id }}" rel="{{ $latestFleet->title ?? 'Unknown fleet'}}">{{ $latestFleet->title ?? 'Unknown fleet'}} (By: {{ $latestFleet->registeredBy->main_character->name }})</option>
+                    <option value="{{ $latestFleet->id }}" rel="{{ $latestFleet->title ?? 'Unknown fleet'}}">{{ $latestFleet->title ?? 'Unknown fleet'}} ({{ __('fleetparticipation::plugin.by_label') }}: {{ $latestFleet->registeredBy->main_character->name }})</option>
                 @endforeach
             </select><br>
         @endif
-        <label for="title">Name of the fleet or event:</label>
-        <input type="text" name="title" id="title" maxlength="100" placeholder="Fleet name..."><br>
-        <label for="points">Number of fleet points to give each member:</label>
+        <label for="title">{{ __('fleetparticipation::plugin.name_of_fleet_label') }}:</label>
+        <input type="text" name="title" id="title" maxlength="100" placeholder="{{ __('fleetparticipation::plugin.fleet_name') }}..."><br>
+        <label for="points">{{ __('fleetparticipation::plugin.num_of_points_to_give_label') }}:</label>
         <input type="number" name="points" id="points" max="100" min="1" value="1"><br>
-        <textarea name="fleet" id="fleet" placeholder="The fleet members..." cols="40" rows="20"></textarea>
+        <textarea name="fleet" id="fleet" placeholder="{{ __('fleetparticipation::plugin.members_of_fleet_placeholder') }}..." cols="40" rows="20"></textarea>
         <hr>
-        <button type="submit" class="btn btn-info" id="save" name="save">Register</button>
+        <button type="submit" class="btn btn-info" id="save" name="save">{{ __('fleetparticipation::plugin.register_btn') }}</button>
     </form>
 @endsection
 

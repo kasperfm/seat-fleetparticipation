@@ -8,8 +8,8 @@
     <table class="table" id="edit_fleet_table">
         <thead>
         <tr>
-            <th scope="col">Pilot name</th>
-            <th scope="col">Points</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.pilot_name') }}</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.points') }}</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -19,9 +19,9 @@
                     <td>{{ $pilotName }}</td>
                     <td>{{ $entry['totalPoints'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showPilotDetails" data-character="{{ $pilotName }}" data-userid="{{ $entry['user_id'] }}">Details</button>
-                        <button type="button" class="btn btn-success add-points-to-member-btn" data-userid="{{ $entry['user_id'] }}">Add point</button>
-                        <button type="button" class="btn btn-danger remove-points-from-member-btn" data-userid="{{ $entry['user_id'] }}">Remove point</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showPilotDetails" data-character="{{ $pilotName }}" data-userid="{{ $entry['user_id'] }}">{{ __('fleetparticipation::plugin.details_btn') }}</button>
+                        <button type="button" class="btn btn-success add-points-to-member-btn" data-userid="{{ $entry['user_id'] }}">{{ __('fleetparticipation::plugin.add_point_btn') }}</button>
+                        <button type="button" class="btn btn-danger remove-points-from-member-btn" data-userid="{{ $entry['user_id'] }}">{{ __('fleetparticipation::plugin.remove_point_btn') }}</button>
                     </td>
                 </tr>
             @endforeach
@@ -32,7 +32,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="showPilotDetailsLabel">Pilot details</h5>
+                    <h5 class="modal-title" id="showPilotDetailsLabel">{{ __('fleetparticipation::plugin.pilot_details') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -41,9 +41,9 @@
                     <table class="table" id="details_table">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Points</th>
-                                <th>Registered by</th>
+                                <th>{{ __('fleetparticipation::plugin.date_label') }}</th>
+                                <th>{{ __('fleetparticipation::plugin.points') }}</th>
+                                <th>{{ __('fleetparticipation::plugin.registered_by_label') }}</th>
                             </tr>
                         </thead>
                         <tbody id="details-table-body">
@@ -51,7 +51,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('fleetparticipation::plugin.close_btn') }}</button>
                 </div>
             </div>
         </div>

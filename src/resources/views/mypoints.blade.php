@@ -3,24 +3,24 @@
 @extends('web::layouts.grids.6-6')
 
 @section('left')
-    <h1>Your total fleet points: {{ $totalPoints ?? 0 }}</h1>
-    <h2>Earned this month: {{ $pointsThisMonth }}</h2>
+    <h1>{{ __('fleetparticipation::plugin.total_fleet_points') }}: {{ $totalPoints ?? 0 }}</h1>
+    <h2>{{ __('fleetparticipation::plugin.earned_this_month') }}: {{ $pointsThisMonth }}</h2>
     <hr>
-    <p>Fleets you have participated in:</p>
+    <p>{{ __('fleetparticipation::plugin.participated_fleets') }}:</p>
     <ul>
     @foreach($fleets as $fleet)
-        <li><strong>{{ $fleet['title'] }}</strong>: {{ $fleet['points'] }} points</li>
+        <li><strong>{{ $fleet['title'] }}</strong>: {{ $fleet['points'] }} {{ __('fleetparticipation::plugin.points') }}</li>
     @endforeach
     </ul>
 @endsection
 
 @section('right')
-    <h1>Corp highscore this month</h1>
+    <h1>{{ __('fleetparticipation::plugin.corp_highscore') }}</h1>
     <table class="table" id="highscore_table">
         <thead>
         <tr>
             <th scope="col">Pilot main character</th>
-            <th scope="col">Points</th>
+            <th scope="col">{{ __('fleetparticipation::plugin.points') }}</th>
         </tr>
         </thead>
         <tbody>

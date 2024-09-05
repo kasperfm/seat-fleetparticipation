@@ -25,6 +25,9 @@ class FleetParticipationServiceProvider extends AbstractSeatPlugin
         // Add the views for the plugin
         $this->add_views();
 
+        // Load translations
+        $this->add_translations();
+
         // Register migrations
         $this->add_migrations();
     }
@@ -43,6 +46,14 @@ class FleetParticipationServiceProvider extends AbstractSeatPlugin
         $this->mergeConfigFrom(
             __DIR__ . '/Config/fleetparticipation.sidebar.php', 'package.sidebar');
 
+    }
+
+    /**
+     * Import translations.
+     */
+    private function add_translations()
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'fleetparticipation');
     }
 
     private function add_migrations()
