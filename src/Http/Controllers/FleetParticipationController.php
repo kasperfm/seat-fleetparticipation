@@ -155,7 +155,7 @@ class FleetParticipationController extends Controller
     public function saveFleet(Request $request)
     {
         if (!$request->has('fleet') || empty($request->input('fleet'))) {
-            return back()->with('error', 'Unable to register an empty fleet!');
+            return back()->with('error', __('fleetparticipation::plugin.empty_fleet_msg'));
         }
 
         $pointsValue = $request->input('points');
@@ -186,6 +186,14 @@ class FleetParticipationController extends Controller
             ]);
         }
 
-        return back()->with('status', 'Fleet participants registered successfully :-)');
+        return back()->with('status', __('fleetparticipation::plugin.fleet_registered_msg'));
+    }
+
+    public function deleteFleet(Request $request, FleetParticipationFleet $fleet)
+    {
+        $fleet->points()->delete();
+        $fleet->delete();
+
+        return back()->with('status', __('fleetparticipation::plugin.fleet_deleted_msg'));
     }
 }

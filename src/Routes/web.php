@@ -49,4 +49,10 @@
             'uses' => 'FleetParticipationController@removePointsFromMember',
             'middleware' => 'can:fleetparticipation.admin'
         ]);
+
+        Route::get('/delete/{fleet}', [
+            'as' => 'fleetparticipation.delete',
+            'uses' => 'FleetParticipationController@deleteFleet',
+            'middleware' => 'can:fleetparticipation.admin'
+        ]);
     });

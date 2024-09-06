@@ -33,4 +33,9 @@ return [
     'number_of_members_label' => 'Antal af piloter',
     'total_points_label' => 'Total honks',
     'edit_btn' => 'Rediger',
+    'delete_btn' => 'Slet',
+    'confirm' => 'Er du sikker?',
+    'fleet_deleted_msg' => 'Fleet er blevet slettet!',
+    'fleet_registered_msg' => 'Fleet er registreret :-)',
+    'empty_fleet_msg' => 'Kan ikke registrere en tom fleet!',
 ];

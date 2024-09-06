@@ -23,7 +23,7 @@
                 <td>{{ $fleet->registeredBy->main_character->name }}</td>
                 <td>{{ $fleet->memberCount() }}</td>
                 <td>{{ $fleet->points->sum('points') }}</td>
-                <td><a href="{{ route('fleetparticipation.edit', $fleet->id) }}">{{ __('fleetparticipation::plugin.edit_btn') }}</a></td>
+                <td><a class="btn btn-primary" href="{{ route('fleetparticipation.edit', $fleet->id) }}">{{ __('fleetparticipation::plugin.edit_btn') }}</a> <a class="btn btn-danger" href="{{ route('fleetparticipation.delete', $fleet->id) }}" onclick="return confirm('{{ __('fleetparticipation::plugin.confirm') }}')">{{ __('fleetparticipation::plugin.delete_btn') }}</a></td>
             </tr>
         @endforeach
         </tbody>
