@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'main_level' => 'Fleet Participation',
-    'my_points' => 'My Fleet Points',
-    'manage_fleets' => 'Manage Fleets',
-    'register_fleet' => 'Register Fleet',
+    'main_level' => 'Fleet Honks',
+    'my_points' => 'Mine Honks',
+    'manage_fleets' => 'Håndter fleets',
+    'register_fleet' => 'Registrer fleet',
 ];
