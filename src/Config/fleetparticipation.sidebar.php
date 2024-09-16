@@ -29,6 +29,13 @@ return [
                 'route' => 'fleetparticipation.manage',
                 'permission' => ['fleetparticipation.admin']
             ],
+            'statistics' => [
+                'name' => 'Statistics',
+                'label' => 'fleetparticipation::menu.statistics',
+                'icon' => 'fa fa-chart-bar',
+                'route' => 'fleetparticipation.statistics',
+                'permission' => ['fleetparticipation.admin']
+            ],
         ],
     ]
 ];

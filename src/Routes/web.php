@@ -26,6 +26,18 @@
             'middleware' => 'can:fleetparticipation.admin'
         ]);
 
+        Route::get('/statistics', [
+            'as' => 'fleetparticipation.statistics',
+            'uses' => 'FleetParticipationController@statistics',
+            'middleware' => 'can:fleetparticipation.admin'
+        ]);
+
+        Route::post('/statistics/highscore', [
+            'as' => 'fleetparticipation.statistics.highscore',
+            'uses' => 'FleetParticipationController@getHighscoreForMonth',
+            'middleware' => 'can:fleetparticipation.admin'
+        ]);
+
         Route::get('/edit/{fleet}', [
             'as' => 'fleetparticipation.edit',
             'uses' => 'FleetParticipationController@editFleet',

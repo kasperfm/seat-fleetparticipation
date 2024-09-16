@@ -61,6 +61,38 @@ class FleetParticipationController extends Controller
         ]);
     }
 
+    public function statistics()
+    {
+        return view('fleetparticipation::statistics');
+    }
+
+    public function getHighscoreForMonth(Request $request)
+    {
+        if (!$request->has('month')) {
+            abort(404);
+        }
+
+        $month = $request->input('month');
+
+        $fleetMembers = FleetParticipationPoints::whereMonth('created_at', Carbon::parse($month)->month)->orderBy('user_id')
+            ->get()
+            ->groupBy('user_id');
+
+        $highscore = [];
+        foreach ($fleetMembers as $pilotID => $fleetMemberPoints) {
+            $pilot = [];
+            $pilotName = User::find($pilotID)->main_character->name;
+
+            $pilot['name'] = $pilotName;
+            $pilot['honks'] = FleetParticipationPoints::whereMonth('created_at', Carbon::parse($month)->month)->where('user_id', $pilotID)->sum('points');
+            $highscore[] = $pilot;
+        }
+
+        uasort($highscore, fn($a, $b) => $b['honks'] <=> $a['honks']);
+
+        return response()->json(['data' => $highscore]);
+    }
+
     public function register(Request $request)
     {
         $latestFleets = FleetParticipationFleet::latest()->take(5)->get();

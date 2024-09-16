@@ -38,4 +38,6 @@ return [
     'fleet_deleted_msg' => 'Fleet er blevet slettet!',
     'fleet_registered_msg' => 'Fleet er registreret :-)',
     'empty_fleet_msg' => 'Kan ikke registrere en tom fleet!',
+
+    'select_month' => 'Vælg en måned du vil se highscore for',
 ];
